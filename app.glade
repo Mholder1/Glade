@@ -67,6 +67,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">find capital city</property>
                 <property name="image">applyImage</property>
                 <signal name="clicked" handler="printCity" swapped="no"/>
               </object>
