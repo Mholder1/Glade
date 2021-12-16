@@ -1,13 +1,12 @@
 import gi
 from gi.repository import Gtk as gtk
-import os
-import json
+from country import Country
+
 gi.require_version('Gtk', '3.0')
 
 
 class Main:
     def __init__(self):
-
         # connect to glade file and initalize the signals
         gladeFile = "app.glade"
         self.builder = gtk.Builder()
@@ -24,21 +23,13 @@ class Main:
         window.show()
 
     def printCity(self, widget):
-        # json file of all countries and their capital cities
-        capitalCities = '/home/marcus/Glade/cities.json'
-
-        # selecting entry field and content from user
         entry = self.builder.get_object('toAddCountry')
         text = entry.get_text().strip()
 
-        # loop through json file and append city to list if it matches user content
-        readfile = open(capitalCities)
-        data = json.load(readfile)
-        for line in data["cities"]:
-            if text.capitalize() == line["country"]:
-                self.listStore.append([line["city"]])
+        country = Country()
 
-        readfile.close
+        city = country.getCapCity(text)
+        self.listStore.append([city])
 
     def appendColumn(self):
         # render the text to be visible in treeview
